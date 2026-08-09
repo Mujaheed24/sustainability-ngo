@@ -1,5 +1,77 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN TOKENS
+   Single source of truth for color, spacing, radius, shadow,
+   and type scale. Tailwind v4 reads @theme to generate utility
+   classes (e.g. bg-brand-green, rounded-card, shadow-elevated),
+   and the plain :root block below exposes the same values as
+   CSS custom properties for inline-style / JS usage during the
+   transition away from ad-hoc inline styles.
+   ============================================================ */
+@theme {
+  /* Brand colors */
+  --color-brand-green: #1a5c2a;
+  --color-brand-green-light: #2d8a45;
+  --color-brand-green-bright: #4ade80;
+  --color-brand-green-pale: #f0faf1;
+  --color-brand-navy: #0d1f2d;
+  --color-brand-white: #ffffff;
+
+  /* Radius scale */
+  --radius-card: 1rem;        /* 16px — standard card corner */
+  --radius-card-lg: 1.5rem;   /* 24px — hero/feature cards */
+  --radius-pill: 9999px;      /* buttons, badges */
+
+  /* Shadow scale */
+  --shadow-card: 0 2px 12px rgba(13, 31, 45, 0.06);
+  --shadow-card-hover: 0 12px 32px rgba(13, 31, 45, 0.12);
+  --shadow-elevated: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  /* Spacing scale (section rhythm) */
+  --spacing-section-y: 5rem;      /* 80px — matches .section-padding */
+  --spacing-section-y-lg: 7rem;   /* 112px — hero-scale sections */
+  --spacing-card-gap: 1.5rem;     /* 24px — default grid gap */
+
+  /* Type scale */
+  --font-size-eyebrow: 0.75rem;
+  --font-size-body: 1rem;
+  --font-size-body-lg: 1.125rem;
+  --font-size-h3: 1.375rem;
+  --font-size-h2: clamp(1.875rem, 4vw, 2.5rem);
+  --font-size-h1: clamp(2.4rem, 5.5vw, 4.25rem);
+}
+
+/* Plain CSS custom properties mirror the tokens above, for use
+   inside existing inline style={{}} blocks while pages are
+   migrated to Tailwind utility classes. Keep these in sync with
+   the @theme block above. */
+:root {
+  --brand-green: #1a5c2a;
+  --brand-green-light: #2d8a45;
+  --brand-green-bright: #4ade80;
+  --brand-green-pale: #f0faf1;
+  --brand-navy: #0d1f2d;
+  --brand-white: #ffffff;
+
+  --radius-card: 1rem;
+  --radius-card-lg: 1.5rem;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 2px 12px rgba(13, 31, 45, 0.06);
+  --shadow-card-hover: 0 12px 32px rgba(13, 31, 45, 0.12);
+  --shadow-elevated: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  --spacing-section-y: 5rem;
+  --spacing-section-y-lg: 7rem;
+  --spacing-card-gap: 1.5rem;
+
+  --font-size-eyebrow: 0.75rem;
+  --font-size-h3: 1.375rem;
+  --font-size-h2: clamp(1.875rem, 4vw, 2.5rem);
+  --font-size-h1: clamp(2.4rem, 5.5vw, 4.25rem);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -26,7 +98,187 @@ body {
   padding: 0 24px;
 }
 
-/* Article prose */
+/* ============================================================
+   SHARED PRIMITIVES
+   Every redesigned page/component should reach for these
+   instead of re-declaring the same thing in inline style={{}}.
+   ============================================================ */
+.eyebrow {
+  display: inline-block;
+  font-size: var(--font-size-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-green-light);
+  margin-bottom: 0.75rem;
+}
+
+/* Light-background variant of .eyebrow, for use on dark section backgrounds
+   (e.g. the founder section on navy). Referenced by about/page.tsx but was
+   never defined — fixed here. */
+.eyebrow-light {
+  display: inline-block;
+  font-size: var(--font-size-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6ee07a;
+  margin-bottom: 0.75rem;
+}
+
+/* Section heading, dark-on-light. Referenced by about/page.tsx but was
+   never defined — fixed here. */
+.section-title {
+  font-size: var(--font-size-h2);
+  font-weight: 900;
+  color: var(--brand-navy);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Section heading, light-on-dark variant. */
+.section-title-light {
+  font-size: var(--font-size-h2);
+  font-weight: 900;
+  color: var(--brand-white);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Generic light card, distinct from .card-standard: no shadow by default,
+   border-based, used for value-grid tiles. Referenced by about/page.tsx
+   but was never defined — fixed here. */
+.card {
+  background: var(--brand-white);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--brand-green-pale);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+  border-color: #bbf7cc;
+}
+
+.card-standard {
+  background: var(--brand-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-card-gap);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-standard:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+/* Program card: slightly stronger lift + accent-colored border on hover,
+   plus a subtle image zoom. Replaces the old per-card JS mouseenter/leave. */
+.program-card {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.program-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 48px rgba(26, 92, 42, 0.12);
+}
+.program-card .program-img {
+  transition: transform 0.5s ease;
+}
+.program-card:hover .program-img {
+  transform: scale(1.06);
+}
+
+/* CallToAction section buttons: background swap on hover (not lift — this
+   section already has a colored gradient bg, a lift here felt busy) */
+.cta-pill-solid {
+  transition: background 0.2s ease;
+}
+.cta-pill-solid:hover {
+  background: #f0fdf4;
+}
+.cta-pill-outline {
+  transition: background 0.2s ease;
+}
+.cta-pill-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Reduced motion: respect user preference across all animations,
+   including Framer Motion (see components/motion/Reveal.tsx) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   KEYFRAMES
+   These were referenced by inline animation:'' declarations in
+   Hero.tsx but never actually defined anywhere — meaning the
+   floating leaf particles, scroll-indicator bounce, and badge
+   pulse have been silently inert. Fixed here.
+   ============================================================ */
+@keyframes floatLeaf {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(8deg); }
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Solid + outline pill buttons. Referenced by programs/page.tsx (and
+   likely other inner pages, since this is an obviously reusable pattern)
+   but never defined anywhere — meaning these CTA buttons have rendered
+   as unstyled text links since launch. Fixed here as shared, reusable
+   button classes rather than a one-off patch. */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--brand-green);
+  color: var(--brand-white);
+  font-weight: 800;
+  padding: 1rem 2.25rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  box-shadow: 0 4px 20px rgba(26, 92, 42, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(26, 92, 42, 0.35);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  font-weight: 700;
+  padding: 1rem 2.25rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.9);
+}
 .prose-custom h3 {
   font-size: 1.2rem;
   font-weight: 700;

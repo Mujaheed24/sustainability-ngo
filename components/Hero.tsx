@@ -1,7 +1,7 @@
-'use client'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown, Leaf } from 'lucide-react'
+import Reveal from './motion/Reveal'
 
 const stats = [
   { number: '4', label: 'Core Programs' },
@@ -78,130 +78,138 @@ export default function Hero() {
       >
         <div style={{ maxWidth: '760px' }}>
           {/* Badge */}
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              background: 'rgba(255,255,255,0.1)',
-              backdropFilter: 'blur(8px)',
-              border: '1px solid rgba(134,239,172,0.25)',
-              color: '#86efac',
-              fontSize: '0.7rem',
-              fontWeight: 700,
-              padding: '0.45rem 1rem',
-              borderRadius: '9999px',
-              marginBottom: '2rem',
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-            }}
-          >
-            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block', animation: 'pulse 2s infinite' }} />
-            Nigeria · Africa · Global Impact
-          </div>
-
-          {/* H1 */}
-          <h1
-            style={{
-              fontSize: 'clamp(2.4rem, 5.5vw, 4.25rem)',
-              fontWeight: 900,
-              lineHeight: 1.08,
-              color: '#ffffff',
-              marginBottom: '1.5rem',
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Turning Waste<br />Into{' '}
-            <span style={{
-              color: '#4ade80',
-              position: 'relative',
-              display: 'inline-block',
-            }}>
-              Wealth.
-            </span>
-            <br />
-            Powering Communities<br />With{' '}
-            <span style={{ color: '#86efac' }}>Clean Energy.</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p
-            style={{
-              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-              lineHeight: 1.75,
-              color: 'rgba(220,252,231,0.9)',
-              maxWidth: '580px',
-              marginBottom: '2.5rem',
-            }}
-          >
-            We are transforming lives across Nigeria through sustainable waste management,
-            renewable energy, climate-resilient agriculture, and community livelihood programs.
-            <strong style={{ color: '#86efac', fontWeight: 700 }}> No community left behind.</strong>
-          </p>
-
-          {/* CTAs */}
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '1rem',
-            }}
-          >
-            <Link
-              href="/programs"
+          <Reveal duration={0.5}>
+            <div
               style={{
-                background: '#ffffff',
-                color: '#1a5c2a',
-                fontWeight: 800,
-                borderRadius: '9999px',
-                padding: '1rem 2.25rem',
-                textDecoration: 'none',
-                fontSize: '0.9375rem',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-              }}
-            >
-              Our Programs
-            </Link>
-            <Link
-              href="/get-involved"
-              style={{
-                border: '2px solid rgba(255,255,255,0.6)',
-                color: '#ffffff',
+                gap: '8px',
+                background: 'rgba(255,255,255,0.1)',
+                backdropFilter: 'blur(8px)',
+                border: '1px solid rgba(134,239,172,0.25)',
+                color: '#86efac',
+                fontSize: '0.7rem',
                 fontWeight: 700,
-                borderRadius: '9999px',
-                padding: '1rem 2.25rem',
-                textDecoration: 'none',
-                fontSize: '0.9375rem',
-                transition: 'background 0.2s, border-color 0.2s',
-                display: 'inline-block',
-                backdropFilter: 'blur(4px)',
-                background: 'rgba(255,255,255,0.05)',
+                padding: '0.45rem 1rem',
+                borderRadius: 'var(--radius-pill)',
+                marginBottom: '2rem',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
               }}
             >
-              Get Involved
-            </Link>
-            <Link
-              href="/donate"
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80', display: 'inline-block', animation: 'pulse 2s infinite' }} />
+              Nigeria · Africa · Global Impact
+            </div>
+          </Reveal>
+
+          {/* H1 */}
+          <Reveal delay={0.1} duration={0.6}>
+            <h1
               style={{
-                background: 'linear-gradient(135deg, #4ade80, #2d8a45)',
-                color: '#0d1f2d',
-                fontWeight: 800,
-                borderRadius: '9999px',
-                padding: '1rem 2.25rem',
-                textDecoration: 'none',
-                fontSize: '0.9375rem',
-                transition: 'transform 0.2s, box-shadow 0.2s',
-                boxShadow: '0 4px 20px rgba(74,222,128,0.3)',
-                display: 'inline-block',
+                fontSize: 'var(--font-size-h1)',
+                fontWeight: 900,
+                lineHeight: 1.08,
+                color: '#ffffff',
+                marginBottom: '1.5rem',
+                letterSpacing: '-0.02em',
               }}
             >
-              Donate Now
-            </Link>
-          </div>
+              Turning Waste<br />Into{' '}
+              <span style={{
+                color: '#4ade80',
+                position: 'relative',
+                display: 'inline-block',
+              }}>
+                Wealth.
+              </span>
+              <br />
+              Powering Communities<br />With{' '}
+              <span style={{ color: '#86efac' }}>Clean Energy.</span>
+            </h1>
+          </Reveal>
+
+          {/* Subtitle */}
+          <Reveal delay={0.2} duration={0.6}>
+            <p
+              style={{
+                fontSize: 'clamp(1rem, 2vw, 1.2rem)',
+                lineHeight: 1.75,
+                color: 'rgba(220,252,231,0.9)',
+                maxWidth: '580px',
+                marginBottom: '2.5rem',
+              }}
+            >
+              We are transforming lives across Nigeria through sustainable waste management,
+              renewable energy, climate-resilient agriculture, and community livelihood programs.
+              <strong style={{ color: '#86efac', fontWeight: 700 }}> No community left behind.</strong>
+            </p>
+          </Reveal>
+
+          {/* CTAs */}
+          <Reveal delay={0.3} duration={0.6}>
+            <div
+              style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '1rem',
+              }}
+            >
+              <Link
+                href="/programs"
+                style={{
+                  background: '#ffffff',
+                  color: 'var(--brand-green)',
+                  fontWeight: 800,
+                  borderRadius: 'var(--radius-pill)',
+                  padding: '1rem 2.25rem',
+                  textDecoration: 'none',
+                  fontSize: '0.9375rem',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  boxShadow: 'var(--shadow-elevated)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                Our Programs
+              </Link>
+              <Link
+                href="/get-involved"
+                style={{
+                  border: '2px solid rgba(255,255,255,0.6)',
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  borderRadius: 'var(--radius-pill)',
+                  padding: '1rem 2.25rem',
+                  textDecoration: 'none',
+                  fontSize: '0.9375rem',
+                  transition: 'background 0.2s, border-color 0.2s',
+                  display: 'inline-block',
+                  backdropFilter: 'blur(4px)',
+                  background: 'rgba(255,255,255,0.05)',
+                }}
+              >
+                Get Involved
+              </Link>
+              <Link
+                href="/donate"
+                style={{
+                  background: 'linear-gradient(135deg, #4ade80, #2d8a45)',
+                  color: 'var(--brand-navy)',
+                  fontWeight: 800,
+                  borderRadius: 'var(--radius-pill)',
+                  padding: '1rem 2.25rem',
+                  textDecoration: 'none',
+                  fontSize: '0.9375rem',
+                  transition: 'transform 0.2s, box-shadow 0.2s',
+                  boxShadow: '0 4px 20px rgba(74,222,128,0.3)',
+                  display: 'inline-block',
+                }}
+              >
+                Donate Now
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </div>
 

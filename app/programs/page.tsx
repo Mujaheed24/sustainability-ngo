@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 export const metadata = {
   title: 'Our Programs | SWWRE — Sustainability From Waste to Wealth',
@@ -25,7 +26,7 @@ const programs = [
     ],
     impact: 'Cleaner communities, new income streams, reduced pollution',
     gradient: 'linear-gradient(135deg, #166534, #1a5c2a)',
-    bg: '#f0faf1',
+    bg: 'var(--brand-green-pale)',
   },
   {
     image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600',
@@ -94,7 +95,7 @@ export default function ProgramsPage() {
       {/* Hero */}
       <section
         style={{
-          background: 'linear-gradient(135deg, #0d3a18 0%, #1a5c2a 60%, #0d4a1e 100%)',
+          background: 'linear-gradient(135deg, #0d3a18 0%, var(--brand-green) 60%, #0d4a1e 100%)',
           padding: '96px 0 80px',
           position: 'relative',
           overflow: 'hidden',
@@ -102,28 +103,29 @@ export default function ProgramsPage() {
       >
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 75% 25%, rgba(45,138,69,0.2) 0%, transparent 55%)', pointerEvents: 'none' }} />
         <div className="container-custom" style={{ position: 'relative' }}>
-          {/* Bug 7 fixed: replaced .hero-badge class with inline styles */}
-          <div style={{
-            display: 'inline-block',
-            background: 'rgba(255,255,255,0.18)',
-            color: '#ffffff',
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            padding: '0.375rem 1rem',
-            borderRadius: '9999px',
-            marginBottom: '1.25rem',
-            textTransform: 'uppercase' as const,
-            letterSpacing: '0.1em',
-          }}>
-            What We Do
-          </div>
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, color: '#ffffff', lineHeight: 1.1, marginBottom: '1.25rem', maxWidth: '680px' }}>
-            Our Programs
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', maxWidth: '580px', lineHeight: 1.75 }}>
-            Four interconnected programs tackling waste, energy poverty, food insecurity,
-            and unemployment — building communities that are resilient, self-sufficient, and sustainable.
-          </p>
+          <Reveal>
+            <div style={{
+              display: 'inline-block',
+              background: 'rgba(255,255,255,0.18)',
+              color: '#ffffff',
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              padding: '0.375rem 1rem',
+              borderRadius: 'var(--radius-pill)',
+              marginBottom: '1.25rem',
+              textTransform: 'uppercase' as const,
+              letterSpacing: '0.1em',
+            }}>
+              What We Do
+            </div>
+            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, color: '#ffffff', lineHeight: 1.1, marginBottom: '1.25rem', maxWidth: '680px' }}>
+              Our Programs
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', maxWidth: '580px', lineHeight: 1.75 }}>
+              Four interconnected programs tackling waste, energy poverty, food insecurity,
+              and unemployment — building communities that are resilient, self-sufficient, and sustainable.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -132,60 +134,63 @@ export default function ProgramsPage() {
         <section
           key={program.slug}
           className="section-padding"
-          style={{ background: index % 2 === 0 ? '#ffffff' : program.bg }}
+          style={{ background: index % 2 === 0 ? 'var(--brand-white)' : program.bg }}
         >
           <div className="container-custom">
             <div style={{ display: 'grid', gap: '3rem', alignItems: 'center' }} className={`prog-grid ${index % 2 !== 0 ? 'prog-reverse' : ''}`}>
 
               {/* Text */}
-              <div>
-                <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#1a5c2a' }}>
-                  Program 0{index + 1}
-                </span>
-                <div style={{ margin: '0.5rem 0 0.75rem' }}>
-                  <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 900, color: '#0d1f2d', margin: 0 }}>
-                    {program.title}
-                  </h2>
-                </div>
-                <p style={{ color: '#1a5c2a', fontWeight: 600, fontStyle: 'italic', marginBottom: '1rem', fontSize: '0.95rem' }}>
-                  {program.tagline}
-                </p>
-                <p style={{ color: '#374151', lineHeight: 1.8, marginBottom: '1.5rem' }}>{program.description}</p>
-                <div style={{ background: '#f0faf1', borderRadius: '0.875rem', padding: '1rem 1.25rem', border: '1px solid #bbf7cc' }}>
-                  <p style={{ fontSize: '0.82rem', color: '#1a5c2a', margin: 0 }}>
-                    <strong>Impact:</strong> {program.impact}
+              <Reveal direction={index % 2 !== 0 ? 'right' : 'left'} distance={24}>
+                <div>
+                  <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--brand-green)' }}>
+                    Program 0{index + 1}
+                  </span>
+                  <div style={{ margin: '0.5rem 0 0.75rem' }}>
+                    <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 900, color: 'var(--brand-navy)', margin: 0 }}>
+                      {program.title}
+                    </h2>
+                  </div>
+                  <p style={{ color: 'var(--brand-green)', fontWeight: 600, fontStyle: 'italic', marginBottom: '1rem', fontSize: '0.95rem' }}>
+                    {program.tagline}
                   </p>
+                  <p style={{ color: '#374151', lineHeight: 1.8, marginBottom: '1.5rem' }}>{program.description}</p>
+                  <div style={{ background: 'var(--brand-green-pale)', borderRadius: '0.875rem', padding: '1rem 1.25rem', border: '1px solid #bbf7cc' }}>
+                    <p style={{ fontSize: '0.82rem', color: 'var(--brand-green)', margin: 0 }}>
+                      <strong>Impact:</strong> {program.impact}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Reveal>
 
               {/* Activities card with image */}
-              <div style={{ background: program.gradient, borderRadius: '1.25rem', overflow: 'hidden', color: '#ffffff' }}>
-                {/* Bug 10 fixed: replaced emoji with next/image Unsplash photo */}
-                <div style={{ position: 'relative', height: '200px', width: '100%' }}>
-                  <Image
-                    src={program.image}
-                    alt={program.imageAlt}
-                    fill
-                    style={{ objectFit: 'cover', opacity: 0.6 }}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+              <Reveal direction={index % 2 !== 0 ? 'left' : 'right'} distance={24} delay={0.15}>
+                <div style={{ background: program.gradient, borderRadius: 'var(--radius-card-lg)', overflow: 'hidden', color: '#ffffff' }}>
+                  <div style={{ position: 'relative', height: '200px', width: '100%' }}>
+                    <Image
+                      src={program.image}
+                      alt={program.imageAlt}
+                      fill
+                      style={{ objectFit: 'cover', opacity: 0.6 }}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  <div style={{ padding: '2.25rem' }}>
+                    <h3 style={{ fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '1.25rem', opacity: 0.7 }}>
+                      Key Activities
+                    </h3>
+                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
+                      {program.activities.map(activity => (
+                        <li key={activity} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.88rem', lineHeight: 1.5 }}>
+                          <span style={{ width: '20px', height: '20px', background: 'rgba(255,255,255,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', flexShrink: 0, marginTop: '1px' }}>
+                            ✓
+                          </span>
+                          {activity}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-                <div style={{ padding: '2.25rem' }}>
-                  <h3 style={{ fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '1.25rem', opacity: 0.7 }}>
-                    Key Activities
-                  </h3>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.875rem' }}>
-                    {program.activities.map(activity => (
-                      <li key={activity} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '0.88rem', lineHeight: 1.5 }}>
-                        <span style={{ width: '20px', height: '20px', background: 'rgba(255,255,255,0.2)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.65rem', flexShrink: 0, marginTop: '1px' }}>
-                          ✓
-                        </span>
-                        {activity}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              </Reveal>
 
             </div>
           </div>
@@ -193,20 +198,22 @@ export default function ProgramsPage() {
       ))}
 
       {/* CTA */}
-      <section className="section-padding" style={{ background: '#0d1f2d' }}>
-        <div className="container-custom" style={{ textAlign: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 900, color: '#ffffff', marginBottom: '1rem' }}>
-            Want to Support These Programs?
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-            Your donation, partnership, or volunteer work directly funds these
-            community programs across Nigeria.
-          </p>
-          <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/donate" className="btn-primary">Donate to a Program</Link>
-            <Link href="/get-involved" className="btn-outline" style={{ color: '#ffffff' }}>Partner With Us</Link>
+      <section className="section-padding" style={{ background: 'var(--brand-navy)' }}>
+        <Reveal>
+          <div className="container-custom" style={{ textAlign: 'center' }}>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 900, color: '#ffffff', marginBottom: '1rem' }}>
+              Want to Support These Programs?
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.05rem', maxWidth: '520px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+              Your donation, partnership, or volunteer work directly funds these
+              community programs across Nigeria.
+            </p>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/donate" className="btn-primary">Donate to a Program</Link>
+              <Link href="/get-involved" className="btn-outline" style={{ color: '#ffffff' }}>Partner With Us</Link>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />
