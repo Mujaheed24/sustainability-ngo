@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 export default function Founder() {
   const expertise = [
     'Sustainable Development Planning',
@@ -56,25 +58,26 @@ export default function Founder() {
           </div>
 
           <div style={{ background: '#1a2e3e', borderRadius: '1.25rem', padding: '2rem', border: '1px solid rgba(74,222,128,0.15)' }}>
-            {/* Styled initials avatar */}
+            {/* Real founder photo replacing the initials avatar */}
             <div
               style={{
-                width: '96px',
-                height: '96px',
+                width: '112px',
+                height: '112px',
                 borderRadius: '50%',
-                background: 'linear-gradient(135deg, #1a5c2a, #2d8a45)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 margin: '0 auto 1.5rem',
-                fontSize: '1.75rem',
-                fontWeight: 800,
-                color: '#ffffff',
-                letterSpacing: '-0.02em',
                 border: '3px solid rgba(74,222,128,0.3)',
+                overflow: 'hidden',
+                position: 'relative',
               }}
             >
-              AA
+              <Image
+                src="/images/founder-aji-abba.jpg"
+                alt="Dr. Aji Abba, Founder of Sustainability From Waste to Wealth and Renewable Energy"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="112px"
+                priority
+              />
             </div>
 
             <div className="text-center mb-6">

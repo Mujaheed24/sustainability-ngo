@@ -4,6 +4,7 @@ import { HandHeart, Handshake, Heart } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
+import CopyLinkButton from '@/components/CopyLinkButton'
 
 export default function GetInvolvedPage() {
   const [volunteerStatus, setVolunteerStatus] = useState<'idle' | 'success'>('idle')
@@ -165,6 +166,9 @@ export default function GetInvolvedPage() {
               <p style={{ color: '#6b7280', marginTop: '0.75rem' }}>
                 Fill in the form below and we will reach out to match you with the right program.
               </p>
+              <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
+                <CopyLinkButton anchor="#volunteer" label="Copy Volunteer Form Link" />
+              </div>
             </div>
 
             {volunteerStatus === 'success' ? (
@@ -254,6 +258,9 @@ export default function GetInvolvedPage() {
                 Organizations, businesses, government agencies, and institutions
                 are welcome to partner with us for greater community impact.
               </p>
+              <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center' }}>
+                <CopyLinkButton anchor="#partner" label="Copy Partnership Form Link" dark />
+              </div>
             </div>
 
             {partnerStatus === 'success' ? (

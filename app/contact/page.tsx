@@ -123,7 +123,7 @@ export default function ContactPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
                 { icon: <Mail style={{ width: '22px', height: '22px', color: '#1a5c2a' }} />, title: 'Email Us', lines: ['info@swwre.org'], sub: 'We reply within 1–2 business days' },
-                { icon: <Phone style={{ width: '22px', height: '22px', color: '#1a5c2a' }} />, title: 'Call Us', lines: ['+234 000 000 0000'], sub: 'Mon – Fri, 9am – 5pm WAT' },
+                { icon: <Phone style={{ width: '22px', height: '22px', color: '#1a5c2a' }} />, title: 'Call Us', lines: ['+234 806 544 4962'], sub: 'Mon – Fri, 9am – 5pm WAT' },
                 { icon: <MapPin style={{ width: '22px', height: '22px', color: '#1a5c2a' }} />, title: 'Location', lines: ['Nigeria, West Africa'], sub: 'Serving communities across Africa' },
               ].map(item => (
                 <div key={item.title} style={{ background: '#ffffff', borderRadius: '1.125rem', padding: '1.25rem', boxShadow: '0 1px 4px rgba(0,0,0,0.06)', display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>

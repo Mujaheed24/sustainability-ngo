@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import { Handshake, Building2, Leaf, Users, FlaskConical, Globe, Target } from 'lucide-react'
@@ -128,37 +129,41 @@ export default function AboutPage() {
             <h2 className="section-title-light">Meet Our Founder</h2>
           </div>
 
-          <div style={{ maxWidth: '900px', margin: '0 auto', background: '#1a2e3e', borderRadius: '1.5rem', padding: '3rem', border: '1px solid rgba(26,92,42,0.3)' }}>
-            <div style={{ display: 'grid', gap: '2.5rem', alignItems: 'center' }} className="founder-inner">
-              <div style={{ textAlign: 'center' }}>
-                <div style={{ width: '120px', height: '120px', background: 'linear-gradient(135deg,#1a5c2a,#2d8a45)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem', border: '3px solid rgba(110,224,122,0.3)', fontSize: '2.25rem', fontWeight: 800, color: '#ffffff', letterSpacing: '-0.02em' }}>
-                  AA
-                </div>
-                <h3 style={{ fontWeight: 800, fontSize: '1.15rem', color: '#ffffff', margin: '0 0 4px' }}>Dr. Aji Abba</h3>
-                <p style={{ color: '#6ee07a', fontSize: '0.8rem', fontWeight: 600, margin: 0 }}>Founder &amp; Executive Director</p>
+          <div className="founder-inner" style={{ display: 'grid', gap: '1.5rem', alignItems: 'center' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: '120px', height: '120px', borderRadius: '50%', margin: '0 auto 1.25rem', border: '3px solid rgba(110,224,122,0.3)', overflow: 'hidden', position: 'relative' }}>
+                <Image
+                  src="/images/founder-aji-abba.jpg"
+                  alt="Dr. Aji Abba, Founder of Sustainability From Waste to Wealth and Renewable Energy"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="120px"
+                />
               </div>
+              <h3 style={{ fontWeight: 800, fontSize: '1.15rem', color: '#ffffff', margin: '0 0 4px' }}>Dr. Aji Abba</h3>
+              <p style={{ color: '#6ee07a', fontSize: '0.8rem', fontWeight: 600, margin: 0 }}>Founder &amp; Executive Director</p>
+            </div>
 
-              <div>
-                <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '1rem' }}>
-                  Dr. Aji Abba is a Sustainable Development Expert, Climate Change Solutions
-                  Advocate, and Development Practitioner with extensive experience in policy
-                  advisory, community empowerment, and climate resilience across Nigeria.
-                </p>
-                <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
-                  Driven by the belief that sustainable development is not just a goal but
-                  a pathway to a better Nigeria for all, Dr. Abba founded this organization
-                  to bridge the gap between policy and community-level impact.
-                </p>
-                <blockquote style={{ borderLeft: '3px solid #6ee07a', paddingLeft: '1rem', fontStyle: 'italic', color: '#a7f3b5', fontSize: '1rem', margin: '0 0 1.5rem' }}>
-                  "Democracy succeeds when no community is left behind."
-                </blockquote>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  {['Sustainable Development', 'Climate Change', 'Food Security', 'Policy Advisory', 'Community Empowerment', 'Research'].map(tag => (
-                    <span key={tag} style={{ background: '#0d1f2d', color: '#6ee07a', fontSize: '0.72rem', padding: '4px 12px', borderRadius: '999px', border: '1px solid rgba(26,92,42,0.5)' }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            <div>
+              <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '1rem' }}>
+                Dr. Aji Abba is a Sustainable Development Expert, Climate Change Solutions
+                Advocate, and Development Practitioner with extensive experience in policy
+                advisory, community empowerment, and climate resilience across Nigeria.
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: '1.5rem' }}>
+                Driven by the belief that sustainable development is not just a goal but
+                a pathway to a better Nigeria for all, Dr. Abba founded this organization
+                to bridge the gap between policy and community-level impact.
+              </p>
+              <blockquote style={{ borderLeft: '3px solid #6ee07a', paddingLeft: '1rem', fontStyle: 'italic', color: '#a7f3b5', fontSize: '1rem', margin: '0 0 1.5rem' }}>
+                "Democracy succeeds when no community is left behind."
+              </blockquote>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {['Sustainable Development', 'Climate Change', 'Food Security', 'Policy Advisory', 'Community Empowerment', 'Research'].map(tag => (
+                  <span key={tag} style={{ background: '#0d1f2d', color: '#6ee07a', fontSize: '0.72rem', padding: '4px 12px', borderRadius: '999px', border: '1px solid rgba(26,92,42,0.5)' }}>
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>

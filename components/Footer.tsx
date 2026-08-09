@@ -107,7 +107,7 @@ export default function Footer() {
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontSize: '0.875rem', color: '#6b7280' }}>
                 <Phone style={{ width: '14px', height: '14px', color: '#4ade80', flexShrink: 0 }} />
-                +234 000 000 0000
+                +234 806 544 4962
               </li>
             </ul>
           </div>
