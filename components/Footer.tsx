@@ -1,14 +1,43 @@
 'use client'
 
 import Link from 'next/link'
-import { MapPin, Mail, Phone } from 'lucide-react'
+import { MapPin, Mail, Phone, Clock } from 'lucide-react'
+
+// Column header with a short brand-colored underline, matching the
+// "Working Hours / Thematic Areas / Quick Links" header treatment
+// referenced during the footer redesign.
+function ColumnHeader({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ marginBottom: '1.25rem' }}>
+      <h4 style={{ color: 'var(--brand-white)', fontWeight: 700, fontSize: '0.95rem', margin: '0 0 0.5rem' }}>
+        {children}
+      </h4>
+      <div style={{ width: '2.5rem', height: '2px', background: 'var(--brand-green-bright)' }} />
+    </div>
+  )
+}
+
+// Same six focus areas listed in the org overview (Section 1 of the
+// briefing). All point at /programs since there are no dedicated
+// per-area pages yet — avoids inventing links that don't exist.
+const thematicAreas = [
+  'Waste Management',
+  'Renewable Energy',
+  'Agriculture',
+  'Livelihoods',
+  'Climate Resilience',
+  'Policy',
+]
+
+// Same 7 states added to the Contact page's "Where We Work" grid.
+const regionalOffices = 'Zamfara, Kano, Kaduna, Yobe, Maiduguri, Abuja, Lagos'
 
 export default function Footer() {
   return (
     <footer style={{ background: 'var(--brand-navy)', color: '#9ca3af' }} className="pt-16 pb-6">
       <div className="container-custom">
         <div
-          style={{ display: 'grid', gap: '2rem', gridTemplateColumns: '1fr', marginBottom: '3rem' }}
+          style={{ display: 'grid', gap: '2.5rem', gridTemplateColumns: '1fr', marginBottom: '3rem' }}
           className="footer-grid"
         >
           {/* Brand column */}
@@ -34,7 +63,7 @@ export default function Footer() {
                   href="#"
                   style={{
                     fontSize: '0.75rem',
-                    background: '#1a2e3e',
+                    background: 'var(--brand-navy-alt)',
                     padding: '0.375rem 0.75rem',
                     borderRadius: '9999px',
                     color: '#9ca3af',
@@ -46,7 +75,7 @@ export default function Footer() {
                     ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--brand-white)'
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = '#1a2e3e'
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'var(--brand-navy-alt)'
                     ;(e.currentTarget as HTMLAnchorElement).style.color = '#9ca3af'
                   }}
                 >
@@ -56,18 +85,34 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick links */}
+          {/* Quick links, with a Donate CTA up top */}
           <div>
-            <h4 style={{ color: 'var(--brand-white)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Quick Links
-            </h4>
+            <ColumnHeader>Quick Links</ColumnHeader>
+            <Link
+              href="/donate"
+              style={{
+                display: 'inline-block',
+                background: 'var(--brand-green)',
+                color: 'var(--brand-white)',
+                fontWeight: 700,
+                fontSize: '0.85rem',
+                padding: '0.6rem 1.25rem',
+                borderRadius: 'var(--radius-pill)',
+                textDecoration: 'none',
+                marginBottom: '1.25rem',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.background = 'var(--brand-green-light)'}
+              onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.background = 'var(--brand-green)'}
+            >
+              Become A Donor
+            </Link>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {[
                 { label: 'About', href: '/about' },
                 { label: 'Programs', href: '/programs' },
                 { label: 'Blog', href: '/blog' },
                 { label: 'Get Involved', href: '/get-involved' },
-                { label: 'Donate', href: '/donate' },
                 { label: 'Contact', href: '/contact' },
               ].map(link => (
                 <li key={link.label}>
@@ -84,12 +129,45 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Thematic areas */}
           <div>
-            <h4 style={{ color: 'var(--brand-white)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-              Contact
-            </h4>
-            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <ColumnHeader>Thematic Areas</ColumnHeader>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {thematicAreas.map(area => (
+                <li key={area}>
+                  <Link
+                    href="/programs"
+                    style={{ fontSize: '0.875rem', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}
+                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = 'var(--brand-green-bright)'}
+                    onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#9ca3af'}
+                  >
+                    {area}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Working hours & contact */}
+          <div>
+            <ColumnHeader>Working Hours &amp; Contact</ColumnHeader>
+            <div style={{ marginBottom: '1rem' }}>
+              <p style={{ fontSize: '0.875rem', color: 'var(--brand-white)', fontWeight: 600, margin: '0 0 0.35rem' }}>Head Office</p>
+              <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: '#6b7280', margin: 0 }}>
+                <Clock style={{ width: '13px', height: '13px', color: 'var(--brand-green-bright)', flexShrink: 0 }} />
+                Mon – Fri, 9am – 5pm WAT
+              </p>
+            </div>
+            <div style={{ marginBottom: '1.25rem' }}>
+              <p style={{ fontSize: '0.875rem', color: 'var(--brand-white)', fontWeight: 600, margin: '0 0 0.35rem', lineHeight: 1.5 }}>
+                {regionalOffices} Offices
+              </p>
+              <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: '#6b7280', margin: 0 }}>
+                <Clock style={{ width: '13px', height: '13px', color: 'var(--brand-green-bright)', flexShrink: 0 }} />
+                Mon – Fri, 9am – 5pm WAT
+              </p>
+            </div>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', fontSize: '0.875rem', color: '#6b7280' }}>
                 <MapPin style={{ width: '14px', height: '14px', color: 'var(--brand-green-bright)', flexShrink: 0, marginTop: '2px' }} />
                 Nigeria, West Africa
@@ -136,7 +214,10 @@ export default function Footer() {
 
       <style>{`
         @media (min-width: 768px) {
-          .footer-grid { grid-template-columns: 2fr 1fr 1fr !important; }
+          .footer-grid { grid-template-columns: 1.4fr 1fr 1fr !important; }
+        }
+        @media (min-width: 1024px) {
+          .footer-grid { grid-template-columns: 1.4fr 0.9fr 1fr 1.2fr !important; }
         }
       `}</style>
     </footer>

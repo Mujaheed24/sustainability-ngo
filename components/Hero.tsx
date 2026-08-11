@@ -2,12 +2,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown, Leaf } from 'lucide-react'
 import Reveal from './motion/Reveal'
+import CountUpStat from './CountUpStat'
 
 const stats = [
-  { number: '4', label: 'Core Programs' },
-  { number: '35M+', label: 'Nigerians We Serve' },
-  { number: '2025', label: 'Year Founded' },
-  { number: '100%', label: 'Community Focus' },
+  { number: '4', label: 'Core Programs', animate: true },
+  { number: '35M+', label: 'Nigerians We Serve', animate: true },
+  { number: '2025', label: 'Year Founded', animate: false },
+  { number: '100%', label: 'Community Focus', animate: true },
 ]
 
 export default function Hero() {
@@ -239,7 +240,7 @@ export default function Hero() {
               }}
             >
               <p style={{ fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 900, color: '#4ade80', margin: 0, lineHeight: 1 }}>
-                {stat.number}
+                <CountUpStat value={stat.number} animate={stat.animate} />
               </p>
               <p style={{ fontSize: '0.72rem', color: 'rgba(220,252,231,0.7)', marginTop: '0.25rem', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                 {stat.label}

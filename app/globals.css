@@ -18,6 +18,14 @@
   --color-brand-navy: #0d1f2d;
   --color-brand-white: #ffffff;
 
+  /* Additional brand-hued colors surfaced during Navbar/Footer migration.
+     These already appear (as raw hex) on other pages too — see globals.css
+     comment below for details — but are only wired up as tokens for
+     Navbar/Footer in this pass. */
+  --color-brand-green-accent: #86efac;  /* active nav link, accent text on dark bg */
+  --color-brand-green-dark: #0d4a1e;    /* mobile menu flyout bg, dark gradient stops */
+  --color-brand-navy-alt: #1a2e3e;      /* footer social pills, dark form panels */
+
   /* Radius scale */
   --radius-card: 1rem;        /* 16px — standard card corner */
   --radius-card-lg: 1.5rem;   /* 24px — hero/feature cards */
@@ -53,6 +61,12 @@
   --brand-green-pale: #f0faf1;
   --brand-navy: #0d1f2d;
   --brand-white: #ffffff;
+
+  /* See matching comment in the @theme block above — added for the
+     Navbar/Footer token migration (Phase 3). */
+  --brand-green-accent: #86efac;
+  --brand-green-dark: #0d4a1e;
+  --brand-navy-alt: #1a2e3e;
 
   --radius-card: 1rem;
   --radius-card-lg: 1.5rem;

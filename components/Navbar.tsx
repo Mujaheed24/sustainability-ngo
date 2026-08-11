@@ -40,7 +40,7 @@ export default function Navbar() {
           right: 0,
           zIndex: 100,
           transition: 'background 0.35s, box-shadow 0.35s',
-          background: scrolled || !isHome ? 'rgba(26,92,42,0.97)' : 'transparent',
+          background: scrolled || !isHome ? 'color-mix(in srgb, var(--brand-green) 97%, transparent)' : 'transparent',
           backdropFilter: scrolled || !isHome ? 'blur(12px)' : 'none',
           boxShadow: scrolled || !isHome ? '0 2px 24px rgba(0,0,0,0.18)' : 'none',
         }}
@@ -68,7 +68,7 @@ export default function Navbar() {
                   style={{
                     fontSize: '0.875rem',
                     fontWeight: active ? 700 : 500,
-                    color: active ? '#86efac' : 'rgba(255,255,255,0.88)',
+                    color: active ? 'var(--brand-green-accent)' : 'rgba(255,255,255,0.88)',
                     textDecoration: 'none',
                     position: 'relative',
                     paddingBottom: '2px',
@@ -82,7 +82,7 @@ export default function Navbar() {
                       left: 0,
                       right: 0,
                       height: '2px',
-                      background: '#86efac',
+                      background: 'var(--brand-green-accent)',
                       borderRadius: '2px',
                     }} />
                   )}
@@ -124,7 +124,7 @@ export default function Navbar() {
             overflow: 'hidden',
             maxHeight: menuOpen ? '600px' : '0',
             transition: 'max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-            background: 'rgba(13,74,30,0.98)',
+            background: 'color-mix(in srgb, var(--brand-green-dark) 98%, transparent)',
             backdropFilter: 'blur(12px)',
           }}
           className="md:hidden"
@@ -141,7 +141,7 @@ export default function Navbar() {
                     borderBottom: '1px solid rgba(255,255,255,0.08)',
                     fontSize: '0.9375rem',
                     fontWeight: active ? 700 : 400,
-                    color: active ? '#86efac' : 'rgba(255,255,255,0.85)',
+                    color: active ? 'var(--brand-green-accent)' : 'rgba(255,255,255,0.85)',
                     textDecoration: 'none',
                     display: 'block',
                   }}

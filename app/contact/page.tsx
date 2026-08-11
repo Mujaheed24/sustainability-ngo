@@ -108,6 +108,16 @@ export default function ContactPage() {
     { icon: <MapPin style={{ width: '22px', height: '22px', color: 'var(--brand-green)' }} />, title: 'Location', lines: ['Nigeria, West Africa'], sub: 'Serving communities across Africa' },
   ]
 
+  const offices = [
+    'Zamfara',
+    'Kano',
+    'Kaduna',
+    'Yobe',
+    'Maiduguri',
+    'Abuja',
+    'Lagos',
+  ]
+
   return (
     <>
       <Navbar />
@@ -135,6 +145,37 @@ export default function ContactPage() {
               Have a question, partnership idea, or just want to learn more? We&apos;d love to hear from you.
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      {/* Where We Work — office/coverage grid */}
+      <section className="section-padding" style={{ background: 'var(--brand-white)', paddingTop: 'var(--spacing-section-y)', paddingBottom: '3rem' }}>
+        <div className="container-custom">
+          <Reveal>
+            <div style={{ textAlign: 'center', maxWidth: '560px', margin: '0 auto 2.5rem' }}>
+              <span className="eyebrow">Where We Work</span>
+              <h2 className="section-title" style={{ fontSize: '1.75rem', marginBottom: '0.75rem' }}>Our Locations</h2>
+              <p style={{ color: '#6b7280', fontSize: '0.95rem', lineHeight: 1.7 }}>
+                SWWRE runs programs and maintains a community presence across these states.
+              </p>
+            </div>
+          </Reveal>
+          <div className="offices-grid" style={{ display: 'grid', gap: '1rem' }}>
+            {offices.map((city, i) => (
+              <Reveal key={city} delay={i * 0.06}>
+                <div
+                  className="card-standard"
+                  style={{ padding: '1.5rem 1.25rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem' }}
+                >
+                  <div style={{ background: 'var(--brand-green-pale)', borderRadius: '9999px', padding: '0.75rem', display: 'inline-flex' }}>
+                    <MapPin style={{ width: '20px', height: '20px', color: 'var(--brand-green)' }} />
+                  </div>
+                  <h3 style={{ fontWeight: 700, color: 'var(--brand-navy)', fontSize: '0.95rem', margin: 0 }}>{city}</h3>
+                  <p style={{ fontSize: '0.78rem', color: '#9ca3af', margin: 0 }}>Nigeria</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -275,11 +316,14 @@ export default function ContactPage() {
       <style>{`
         .contact-grid { grid-template-columns: 1fr; }
         .form-row { grid-template-columns: 1fr; }
+        .offices-grid { grid-template-columns: repeat(2, 1fr); }
         @media (min-width: 640px) {
           .form-row { grid-template-columns: 1fr 1fr !important; }
+          .offices-grid { grid-template-columns: repeat(4, 1fr) !important; }
         }
         @media (min-width: 1024px) {
           .contact-grid { grid-template-columns: 1fr 2fr !important; }
+          .offices-grid { grid-template-columns: repeat(7, 1fr) !important; }
         }
       `}</style>
     </>
