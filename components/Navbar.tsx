@@ -92,8 +92,8 @@ export default function Navbar() {
             <Link
               href="/donate"
               style={{
-                background: '#ffffff',
-                color: '#1a5c2a',
+                background: 'var(--brand-white)',
+                color: 'var(--brand-green)',
                 fontWeight: 800,
                 padding: '0.55rem 1.35rem',
                 borderRadius: '9999px',
@@ -110,7 +110,7 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ffffff', padding: '4px', display: 'flex', alignItems: 'center' }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--brand-white)', padding: '4px', display: 'flex', alignItems: 'center' }}
             className="md:hidden"
             aria-label="Toggle menu"
           >
@@ -154,8 +154,8 @@ export default function Navbar() {
               href="/donate"
               style={{
                 marginTop: '1rem',
-                background: '#ffffff',
-                color: '#1a5c2a',
+                background: 'var(--brand-white)',
+                color: 'var(--brand-green)',
                 fontWeight: 800,
                 padding: '0.875rem',
                 borderRadius: '0.75rem',

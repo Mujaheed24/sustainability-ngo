@@ -165,7 +165,7 @@ export default function Programs() {
           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
             <Link
               href="/programs"
-              className="cta-pill"
+              className="btn-primary"
               style={{
                 background: 'var(--brand-green)',
                 color: 'var(--brand-white)',

@@ -5,7 +5,7 @@ import { MapPin, Mail, Phone } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0d1f2d', color: '#9ca3af' }} className="pt-16 pb-6">
+    <footer style={{ background: 'var(--brand-navy)', color: '#9ca3af' }} className="pt-16 pb-6">
       <div className="container-custom">
         <div
           style={{ display: 'grid', gap: '2rem', gridTemplateColumns: '1fr', marginBottom: '3rem' }}
@@ -19,7 +19,7 @@ export default function Footer() {
                 alt="SWWRE Logo"
                 style={{ width: '64px', height: '64px', objectFit: 'contain', display: 'block', flexShrink: 0 }}
               />
-              <span style={{ fontWeight: 700, color: '#ffffff', fontSize: '0.875rem', lineHeight: 1.4 }}>
+              <span style={{ fontWeight: 700, color: 'var(--brand-white)', fontSize: '0.875rem', lineHeight: 1.4 }}>
                 Sustainability From<br />Waste to Wealth
               </span>
             </div>
@@ -42,8 +42,8 @@ export default function Footer() {
                     transition: 'background 0.2s, color 0.2s',
                   }}
                   onMouseEnter={e => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = '#1a5c2a'
-                    ;(e.currentTarget as HTMLAnchorElement).style.color = '#ffffff'
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'var(--brand-green)'
+                    ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--brand-white)'
                   }}
                   onMouseLeave={e => {
                     (e.currentTarget as HTMLAnchorElement).style.background = '#1a2e3e'
@@ -58,7 +58,7 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 style={{ color: '#ffffff', fontWeight: 600, marginBottom: '1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <h4 style={{ color: 'var(--brand-white)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Quick Links
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -74,7 +74,7 @@ export default function Footer() {
                   <Link
                     href={link.href}
                     style={{ fontSize: '0.875rem', color: '#9ca3af', textDecoration: 'none', transition: 'color 0.2s' }}
-                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#4ade80'}
+                    onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = 'var(--brand-green-bright)'}
                     onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#9ca3af'}
                   >
                     {link.label}
@@ -86,27 +86,27 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 style={{ color: '#ffffff', fontWeight: 600, marginBottom: '1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+            <h4 style={{ color: 'var(--brand-white)', fontWeight: 600, marginBottom: '1rem', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Contact
             </h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <li style={{ display: 'flex', alignItems: 'flex-start', gap: '0.625rem', fontSize: '0.875rem', color: '#6b7280' }}>
-                <MapPin style={{ width: '14px', height: '14px', color: '#4ade80', flexShrink: 0, marginTop: '2px' }} />
+                <MapPin style={{ width: '14px', height: '14px', color: 'var(--brand-green-bright)', flexShrink: 0, marginTop: '2px' }} />
                 Nigeria, West Africa
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontSize: '0.875rem', color: '#6b7280' }}>
-                <Mail style={{ width: '14px', height: '14px', color: '#4ade80', flexShrink: 0 }} />
+                <Mail style={{ width: '14px', height: '14px', color: 'var(--brand-green-bright)', flexShrink: 0 }} />
                 <a
                   href="mailto:info@swwre.org"
                   style={{ color: '#6b7280', textDecoration: 'none', transition: 'color 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#4ade80'}
+                  onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = 'var(--brand-green-bright)'}
                   onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = '#6b7280'}
                 >
                   info@swwre.org
                 </a>
               </li>
               <li style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', fontSize: '0.875rem', color: '#6b7280' }}>
-                <Phone style={{ width: '14px', height: '14px', color: '#4ade80', flexShrink: 0 }} />
+                <Phone style={{ width: '14px', height: '14px', color: 'var(--brand-green-bright)', flexShrink: 0 }} />
                 +234 806 544 4962
               </li>
             </ul>

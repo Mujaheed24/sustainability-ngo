@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
+import Reveal from '@/components/motion/Reveal'
 
 export const metadata = {
   title: 'Blog & News | SWWRE — Sustainability From Waste to Wealth',
@@ -82,6 +83,21 @@ const posts = [
   },
 ]
 
+// Newsletter input sits on the dark navy footer-style section — same
+// dark-field pattern used on Get Involved's partner form (.form-input-dark).
+const newsletterInputStyle = {
+  flex: '1',
+  minWidth: '200px',
+  background: 'rgba(255,255,255,0.08)',
+  border: '1.5px solid rgba(255,255,255,0.15)',
+  color: 'var(--brand-white)',
+  borderRadius: '999px',
+  padding: '12px 20px',
+  fontSize: '0.9rem',
+  outline: 'none',
+  transition: 'border-color 0.2s',
+}
+
 export default function BlogPage() {
   const featured = posts[0]
 
@@ -92,7 +108,7 @@ export default function BlogPage() {
       {/* Hero */}
       <section
         style={{
-          background: 'linear-gradient(135deg, #0d3a18 0%, #1a5c2a 60%, #0d4a1e 100%)',
+          background: 'linear-gradient(135deg, #0d3a18 0%, var(--brand-green) 60%, #0d4a1e 100%)',
           padding: '96px 0 80px',
           position: 'relative',
           overflow: 'hidden',
@@ -100,149 +116,159 @@ export default function BlogPage() {
       >
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 75% 25%, rgba(45,138,69,0.2) 0%, transparent 55%)', pointerEvents: 'none' }} />
         <div className="container-custom" style={{ position: 'relative' }}>
-          {/* Bug 7 fixed: replaced .hero-badge class with inline styles */}
-          <div style={{
-            display: 'inline-block',
-            background: 'rgba(255,255,255,0.18)',
-            color: '#ffffff',
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            padding: '0.375rem 1rem',
-            borderRadius: '9999px',
-            marginBottom: '1.25rem',
-            textTransform: 'uppercase' as const,
-            letterSpacing: '0.1em',
-          }}>
-            Stories & Updates
-          </div>
-          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, color: '#ffffff', lineHeight: 1.1, marginBottom: '1.25rem', maxWidth: '680px' }}>
-            Blog &amp; News
-          </h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', maxWidth: '520px', lineHeight: 1.75 }}>
-            Stories from the field, policy insights, community updates, and
-            the latest news from our programs across Nigeria.
-          </p>
+          <Reveal>
+            {/* Bug 7 fixed: replaced .hero-badge class with inline styles */}
+            <div style={{
+              display: 'inline-block',
+              background: 'rgba(255,255,255,0.18)',
+              color: 'var(--brand-white)',
+              fontSize: '0.7rem',
+              fontWeight: 700,
+              padding: '0.375rem 1rem',
+              borderRadius: '9999px',
+              marginBottom: '1.25rem',
+              textTransform: 'uppercase' as const,
+              letterSpacing: '0.1em',
+            }}>
+              Stories & Updates
+            </div>
+            <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, color: 'var(--brand-white)', lineHeight: 1.1, marginBottom: '1.25rem', maxWidth: '680px' }}>
+              Blog &amp; News
+            </h1>
+            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1.05rem', maxWidth: '520px', lineHeight: 1.75 }}>
+              Stories from the field, policy insights, community updates, and
+              the latest news from our programs across Nigeria.
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* Featured Post */}
-      <section className="section-padding" style={{ background: '#ffffff' }}>
+      <section className="section-padding" style={{ background: 'var(--brand-white)' }}>
         <div className="container-custom">
           <span className="eyebrow" style={{ display: 'block', marginBottom: '1.25rem' }}>Featured Story</span>
-          <div
-            style={{
-              background: '#0d1f2d',
-              borderRadius: '1.5rem',
-              overflow: 'hidden',
-              display: 'grid',
-            }}
-            className="featured-grid"
-          >
-            {/* Bug 10 fixed: replaced emoji div with next/image */}
-            <div style={{ position: 'relative', minHeight: '260px' }}>
-              <Image
-                src={featured.image}
-                alt={featured.imageAlt}
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </div>
-
-            {/* Content */}
-            <div style={{ padding: '2.5rem' }}>
-              <span style={{ background: featured.tagColor.bg, color: featured.tagColor.text, fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '999px', display: 'inline-block', marginBottom: '1rem' }}>
-                {featured.category}
-              </span>
-              <h2 style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', fontWeight: 900, color: '#ffffff', lineHeight: 1.25, marginBottom: '0.875rem' }}>
-                {featured.title}
-              </h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '1.25rem', fontSize: '0.9rem' }}>
-                {featured.excerpt}
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', marginBottom: '1.5rem' }}>
-                <span>{featured.date}</span>
-                <span>·</span>
-                <span>{featured.readTime}</span>
+          <Reveal>
+            <div
+              style={{
+                background: 'var(--brand-navy)',
+                borderRadius: 'var(--radius-card-lg)',
+                overflow: 'hidden',
+                display: 'grid',
+              }}
+              className="featured-grid"
+            >
+              {/* Bug 10 fixed: replaced emoji div with next/image */}
+              <div style={{ position: 'relative', minHeight: '260px' }}>
+                <Image
+                  src={featured.image}
+                  alt={featured.imageAlt}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
               </div>
-              <Link href={`/blog/${featured.slug}`} className="btn-primary" style={{ fontSize: '0.85rem' }}>
-                Read Full Story →
-              </Link>
+
+              {/* Content */}
+              <div style={{ padding: '2.5rem' }}>
+                <span style={{ background: featured.tagColor.bg, color: featured.tagColor.text, fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '999px', display: 'inline-block', marginBottom: '1rem' }}>
+                  {featured.category}
+                </span>
+                <h2 style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)', fontWeight: 900, color: 'var(--brand-white)', lineHeight: 1.25, marginBottom: '0.875rem' }}>
+                  {featured.title}
+                </h2>
+                <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.75, marginBottom: '1.25rem', fontSize: '0.9rem' }}>
+                  {featured.excerpt}
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', marginBottom: '1.5rem' }}>
+                  <span>{featured.date}</span>
+                  <span>·</span>
+                  <span>{featured.readTime}</span>
+                </div>
+                <Link href={`/blog/${featured.slug}`} className="btn-primary" style={{ fontSize: '0.85rem' }}>
+                  Read Full Story →
+                </Link>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* All Posts */}
-      <section className="section-padding" style={{ background: '#f0faf1' }}>
+      <section className="section-padding" style={{ background: 'var(--brand-green-pale)' }}>
         <div className="container-custom">
-          <div style={{ marginBottom: '2.5rem' }}>
-            <span className="eyebrow" style={{ display: 'block', marginBottom: '0.25rem' }}>All Articles</span>
-            <h2 className="section-title">Latest Stories</h2>
-          </div>
+          <Reveal>
+            <div style={{ marginBottom: '2.5rem' }}>
+              <span className="eyebrow" style={{ display: 'block', marginBottom: '0.25rem' }}>All Articles</span>
+              <h2 className="section-title">Latest Stories</h2>
+            </div>
+          </Reveal>
 
           <div style={{ display: 'grid', gap: '1.25rem' }} className="blog-grid">
-            {posts.map(post => (
-              <article key={post.slug} className="card" style={{ overflow: 'hidden' }}>
-                {/* Bug 10 fixed: replaced emoji div with next/image */}
-                <div style={{ position: 'relative', height: '160px', width: '100%' }}>
-                  <Image
-                    src={post.image}
-                    alt={post.imageAlt}
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-
-                <div style={{ padding: '1.5rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '6px' }}>
-                    <span style={{ background: post.tagColor.bg, color: post.tagColor.text, fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '999px' }}>
-                      {post.category}
-                    </span>
-                    <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{post.readTime}</span>
+            {posts.map((post, i) => (
+              <Reveal key={post.slug} delay={(i % 3) * 0.08}>
+                <article className="card" style={{ overflow: 'hidden' }}>
+                  {/* Bug 10 fixed: replaced emoji div with next/image */}
+                  <div style={{ position: 'relative', height: '160px', width: '100%' }}>
+                    <Image
+                      src={post.image}
+                      alt={post.imageAlt}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
                   </div>
 
-                  <h3 style={{ fontWeight: 800, color: '#0d1f2d', fontSize: '1rem', lineHeight: 1.35, marginBottom: '0.6rem' }}>
-                    {post.title}
-                  </h3>
-                  <p style={{ color: '#6b7280', fontSize: '0.83rem', lineHeight: 1.65, marginBottom: '1.25rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                    {post.excerpt}
-                  </p>
+                  <div style={{ padding: '1.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem', flexWrap: 'wrap', gap: '6px' }}>
+                      <span style={{ background: post.tagColor.bg, color: post.tagColor.text, fontSize: '0.7rem', fontWeight: 700, padding: '3px 10px', borderRadius: '999px' }}>
+                        {post.category}
+                      </span>
+                      <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{post.readTime}</span>
+                    </div>
 
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{post.date}</span>
-                    <Link href={`/blog/${post.slug}`} style={{ color: '#1a5c2a', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}>
-                      Read More →
-                    </Link>
+                    <h3 style={{ fontWeight: 800, color: 'var(--brand-navy)', fontSize: '1rem', lineHeight: 1.35, marginBottom: '0.6rem' }}>
+                      {post.title}
+                    </h3>
+                    <p style={{ color: '#6b7280', fontSize: '0.83rem', lineHeight: 1.65, marginBottom: '1.25rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      {post.excerpt}
+                    </p>
+
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '0.72rem', color: '#9ca3af' }}>{post.date}</span>
+                      <Link href={`/blog/${post.slug}`} style={{ color: 'var(--brand-green)', fontSize: '0.82rem', fontWeight: 700, textDecoration: 'none' }}>
+                        Read More →
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Newsletter */}
-      <section className="section-padding" style={{ background: '#0d1f2d' }}>
+      <section className="section-padding" style={{ background: 'var(--brand-navy)' }}>
         <div className="container-custom" style={{ textAlign: 'center' }}>
-          <span className="eyebrow-light" style={{ display: 'block', marginBottom: '0.5rem' }}>Stay Connected</span>
-          <h2 className="section-title-light" style={{ marginBottom: '1rem' }}>Stay Updated</h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', maxWidth: '400px', margin: '0 auto 2rem', lineHeight: 1.7 }}>
-            Get our latest stories, program updates, and news delivered straight to your inbox.
-          </p>
-          <div style={{ display: 'flex', gap: '10px', maxWidth: '440px', margin: '0 auto', flexWrap: 'wrap', justifyContent: 'center' }}>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              className="field"
-              style={{ flex: '1', minWidth: '200px', background: 'rgba(255,255,255,0.08)', border: '1.5px solid rgba(255,255,255,0.15)', color: '#ffffff', borderRadius: '999px', padding: '12px 20px' }}
-            />
-            <button className="btn-primary" style={{ whiteSpace: 'nowrap', borderRadius: '999px' }}>
-              Subscribe
-            </button>
-          </div>
+          <Reveal>
+            <span className="eyebrow-light" style={{ display: 'block', marginBottom: '0.5rem' }}>Stay Connected</span>
+            <h2 className="section-title-light" style={{ marginBottom: '1rem' }}>Stay Updated</h2>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', maxWidth: '400px', margin: '0 auto 2rem', lineHeight: 1.7 }}>
+              Get our latest stories, program updates, and news delivered straight to your inbox.
+            </p>
+            <div style={{ display: 'flex', gap: '10px', maxWidth: '440px', margin: '0 auto', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="form-input-dark"
+                style={newsletterInputStyle}
+              />
+              <button className="btn-primary" style={{ whiteSpace: 'nowrap', borderRadius: '999px' }}>
+                Subscribe
+              </button>
+            </div>
+          </Reveal>
         </div>
       </section>
 

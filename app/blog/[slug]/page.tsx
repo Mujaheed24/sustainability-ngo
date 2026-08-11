@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Calendar, User, Tag, Clock } from 'lucide-react'
 import { notFound } from 'next/navigation'
+import Reveal from '@/components/motion/Reveal'
 
 const posts = [
   {
@@ -262,7 +263,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           return (
             <h3
               key={i}
-              style={{ fontSize: '1.1rem', fontWeight: 800, color: '#1a5c2a', marginTop: '1.75rem', marginBottom: '0.5rem' }}
+              style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--brand-green)', marginTop: '1.75rem', marginBottom: '0.5rem' }}
               dangerouslySetInnerHTML={{ __html: html }}
             />
           )
@@ -284,58 +285,64 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       {/* Hero */}
       <section
         style={{
-          background: 'linear-gradient(135deg, #0d3a18 0%, #1a5c2a 60%, #0d4a1e 100%)',
+          background: 'linear-gradient(135deg, #0d3a18 0%, var(--brand-green) 60%, #0d4a1e 100%)',
           padding: '72px 0 64px',
         }}
       >
         <div className="container-custom" style={{ maxWidth: '768px', margin: '0 auto' }}>
-          <Link
-            href="/blog"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#a7f3b5', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 600, marginBottom: '1.5rem' }}
-          >
-            <ArrowLeft style={{ width: '16px', height: '16px' }} /> Back to Blog
-          </Link>
+          <Reveal>
+            <Link
+              href="/blog"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#a7f3b5', textDecoration: 'none', fontSize: '0.85rem', fontWeight: 600, marginBottom: '1.5rem' }}
+            >
+              <ArrowLeft style={{ width: '16px', height: '16px' }} /> Back to Blog
+            </Link>
 
-          <span style={{ background: post!.tagStyle.bg, color: post!.tagStyle.text, fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '999px', display: 'inline-block', marginBottom: '1rem' }}>
-            {post!.category}
-          </span>
+            <span style={{ background: post!.tagStyle.bg, color: post!.tagStyle.text, fontSize: '0.72rem', fontWeight: 700, padding: '4px 12px', borderRadius: '999px', display: 'inline-block', marginBottom: '1rem' }}>
+              {post!.category}
+            </span>
 
-          <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', fontWeight: 900, color: '#ffffff', lineHeight: 1.2, marginBottom: '1.5rem' }}>
-            {post!.title}
-          </h1>
+            <h1 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.25rem)', fontWeight: 900, color: 'var(--brand-white)', lineHeight: 1.2, marginBottom: '1.5rem' }}>
+              {post!.title}
+            </h1>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', color: '#a7f3b5', fontSize: '0.83rem' }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <User style={{ width: '14px', height: '14px' }} />{post!.author}
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Calendar style={{ width: '14px', height: '14px' }} />{post!.date}
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Clock style={{ width: '14px', height: '14px' }} />{post!.readTime}
-            </span>
-          </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', color: '#a7f3b5', fontSize: '0.83rem' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <User style={{ width: '14px', height: '14px' }} />{post!.author}
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Calendar style={{ width: '14px', height: '14px' }} />{post!.date}
+              </span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Clock style={{ width: '14px', height: '14px' }} />{post!.readTime}
+              </span>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Article body */}
-      <section className="section-padding" style={{ background: '#ffffff' }}>
+      <section className="section-padding" style={{ background: 'var(--brand-white)' }}>
         <div className="container-custom" style={{ maxWidth: '768px', margin: '0 auto' }}>
 
           {/* Bug 10 fixed: replaced emoji banner with next/image Unsplash photo */}
-          <div style={{ position: 'relative', height: '320px', width: '100%', borderRadius: '1.25rem', overflow: 'hidden', marginBottom: '2.5rem' }}>
-            <Image
-              src={post!.image}
-              alt={post!.imageAlt}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 768px) 100vw, 768px"
-              priority
-            />
-          </div>
+          <Reveal>
+            <div style={{ position: 'relative', height: '320px', width: '100%', borderRadius: 'var(--radius-card-lg)', overflow: 'hidden', marginBottom: '2.5rem' }}>
+              <Image
+                src={post!.image}
+                alt={post!.imageAlt}
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
+            </div>
+          </Reveal>
 
           {/* Body */}
-          <article>{renderBody(post!.body)}</article>
+          <Reveal delay={0.1}>
+            <article>{renderBody(post!.body)}</article>
+          </Reveal>
 
           {/* Tag */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '2.5rem', paddingTop: '1.5rem', borderTop: '1px solid #e5e7eb' }}>
@@ -346,34 +353,38 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Author card */}
-          <div style={{ marginTop: '2rem', background: '#f0faf1', borderRadius: '1.25rem', padding: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'flex-start', border: '1px solid #bbf7cc' }}>
-            <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg, #1a5c2a, #2d8a45)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 800, color: '#ffffff', flexShrink: 0, letterSpacing: '-0.02em' }}>
-              AA
+          <Reveal>
+            <div style={{ marginTop: '2rem', background: 'var(--brand-green-pale)', borderRadius: 'var(--radius-card-lg)', padding: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'flex-start', border: '1px solid #bbf7cc' }}>
+              <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg, var(--brand-green), var(--brand-green-light))', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', fontWeight: 800, color: 'var(--brand-white)', flexShrink: 0, letterSpacing: '-0.02em' }}>
+                AA
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, color: 'var(--brand-navy)', margin: '0 0 2px', fontSize: '0.95rem' }}>{post!.author}</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--brand-green)', fontWeight: 600, margin: '0 0 6px' }}>
+                  Sustainable Development Expert &amp; Climate Change Solutions Advocate
+                </p>
+                <p style={{ fontSize: '0.8rem', color: '#6b7280', margin: 0, lineHeight: 1.6 }}>
+                  Founder of Sustainability From Waste to Wealth and Renewable Energy (SWWRE), working to build resilient, waste-free communities across Africa.
+                </p>
+              </div>
             </div>
-            <div>
-              <p style={{ fontWeight: 700, color: '#0d1f2d', margin: '0 0 2px', fontSize: '0.95rem' }}>{post!.author}</p>
-              <p style={{ fontSize: '0.78rem', color: '#1a5c2a', fontWeight: 600, margin: '0 0 6px' }}>
-                Sustainable Development Expert &amp; Climate Change Solutions Advocate
-              </p>
-              <p style={{ fontSize: '0.8rem', color: '#6b7280', margin: 0, lineHeight: 1.6 }}>
-                Founder of Sustainability From Waste to Wealth and Renewable Energy (SWWRE), working to build resilient, waste-free communities across Africa.
-              </p>
-            </div>
-          </div>
+          </Reveal>
 
           {/* CTA */}
-          <div style={{ marginTop: '2.5rem', background: '#0d1f2d', color: '#ffffff', borderRadius: '1.25rem', padding: '2.25rem', textAlign: 'center' }}>
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 900, marginBottom: '0.625rem' }}>Want to Make a Difference?</h3>
-            <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem' }}>Support our work or get involved in your community.</p>
-            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/donate" className="btn-primary">Donate Now</Link>
-              <Link href="/get-involved" className="btn-outline" style={{ color: '#ffffff' }}>Get Involved</Link>
+          <Reveal delay={0.05}>
+            <div style={{ marginTop: '2.5rem', background: 'var(--brand-navy)', color: 'var(--brand-white)', borderRadius: 'var(--radius-card-lg)', padding: '2.25rem', textAlign: 'center' }}>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 900, marginBottom: '0.625rem' }}>Want to Make a Difference?</h3>
+              <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem' }}>Support our work or get involved in your community.</p>
+              <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <Link href="/donate" className="btn-primary">Donate Now</Link>
+                <Link href="/get-involved" className="btn-outline" style={{ color: 'var(--brand-white)' }}>Get Involved</Link>
+              </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Back link */}
           <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
-            <Link href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#1a5c2a', fontWeight: 700, textDecoration: 'none', fontSize: '0.88rem' }}>
+            <Link href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--brand-green)', fontWeight: 700, textDecoration: 'none', fontSize: '0.88rem' }}>
               <ArrowLeft style={{ width: '14px', height: '14px' }} /> Back to all articles
             </Link>
           </div>

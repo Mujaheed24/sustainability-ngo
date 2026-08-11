@@ -184,7 +184,7 @@ export default function GetInvolvedPage() {
               </Reveal>
             ) : (
               <Reveal>
-                <form onSubmit={handleVolunteer} className="form-card" style={{ background: '#ffffff', borderRadius: 'var(--radius-card-lg)', padding: '2rem', boxShadow: 'var(--shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <form onSubmit={handleVolunteer} style={{ background: '#ffffff', borderRadius: 'var(--radius-card-lg)', padding: '2rem', boxShadow: 'var(--shadow-card)', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
                       <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: 600, color: 'var(--brand-navy)', marginBottom: '0.5rem' }}>Full Name *</label>
