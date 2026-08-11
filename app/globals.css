@@ -279,6 +279,18 @@ body {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.9);
 }
+/* Form input focus states — used by form pages (Get Involved, Contact).
+   Light variant for white-background forms, dark variant for the
+   partnership form on navy background. */
+.form-input:focus {
+  border-color: var(--brand-green) !important;
+  box-shadow: 0 0 0 3px rgba(26, 92, 42, 0.1);
+}
+.form-input-dark:focus {
+  border-color: #4ade80 !important;
+  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.15);
+}
+
 .prose-custom h3 {
   font-size: 1.2rem;
   font-weight: 700;
