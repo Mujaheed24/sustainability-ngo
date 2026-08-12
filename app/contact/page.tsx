@@ -56,7 +56,7 @@ const inputStyle = {
 
 // Google Apps Script Web App URL (see google-apps-script/Code.gs in the
 // repo for the backend). Replace with your real deployed /exec URL.
-const GOOGLE_FORM_ENDPOINT = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+const GOOGLE_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbys74U4Pi00I2ue_HiTf30HgoryHEdTLdpQXkhHPgEzwAHjLnAiPHg3i5h6CDElvXY/exec'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
@@ -71,23 +71,22 @@ export default function ContactPage() {
     e.preventDefault()
     setLoading(true)
     try {
-      const res = await fetch(GOOGLE_FORM_ENDPOINT, {
+      // mode: 'no-cors' is required here — Apps Script Web App responses
+      // don't reliably carry the Access-Control-Allow-Origin header a
+      // normal fetch needs, which otherwise makes the browser reject the
+      // whole request as an opaque network failure before any status
+      // code is seen (this is what "TypeError: Failed to fetch" was).
+      // The trade-off: the response becomes unreadable (opaque), so we
+      // can't check res.ok or parse JSON back — a fetch that doesn't
+      // throw is treated as a successful submit.
+      await fetch(GOOGLE_FORM_ENDPOINT, {
         method: 'POST',
-        // Apps Script Web Apps don't handle CORS preflight (OPTIONS)
-        // requests, so this deliberately uses text/plain instead of
-        // application/json — that keeps the browser from sending a
-        // preflight at all. The script still parses it as JSON on the
-        // other end via JSON.parse(e.postData.contents).
+        mode: 'no-cors',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify({ formType: 'Contact', ...formData }),
       })
-      const result = await res.json()
-      if (res.ok && result.ok) {
-        setSubmitted(true)
-        setFormData({ name: '', email: '', subject: '', message: '' })
-      } else {
-        alert('Something went wrong. Please try again or email us directly.')
-      }
+      setSubmitted(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
     } catch {
       alert('Network error. Please try again.')
     } finally {

@@ -9,7 +9,7 @@ import Reveal from '@/components/motion/Reveal'
 
 // Google Apps Script Web App URL (see google-apps-script/Code.gs in the
 // repo for the backend). Replace with your real deployed /exec URL.
-const GOOGLE_FORM_ENDPOINT = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+const GOOGLE_FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbys74U4Pi00I2ue_HiTf30HgoryHEdTLdpQXkhHPgEzwAHjLnAiPHg3i5h6CDElvXY/exec'
 
 export default function GetInvolvedPage() {
   const [volunteerStatus, setVolunteerStatus] = useState<'idle' | 'success'>('idle')
@@ -19,11 +19,14 @@ export default function GetInvolvedPage() {
     e.preventDefault()
     const form = e.currentTarget
     const data = Object.fromEntries(new FormData(form).entries())
-    // text/plain (not application/json) deliberately avoids a CORS
-    // preflight — Apps Script Web Apps don't handle OPTIONS requests.
-    // The script parses this as JSON on its end regardless.
+    // mode: 'no-cors' — see the matching comment in contact/page.tsx.
+    // Apps Script Web App responses don't reliably carry the CORS header
+    // a normal fetch needs, so without this the request gets rejected as
+    // an opaque network failure ("TypeError: Failed to fetch") before it
+    // even reaches the script.
     await fetch(GOOGLE_FORM_ENDPOINT, {
       method: 'POST',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({ formType: 'Volunteer', ...data }),
     })
@@ -37,6 +40,7 @@ export default function GetInvolvedPage() {
     const data = Object.fromEntries(new FormData(form).entries())
     await fetch(GOOGLE_FORM_ENDPOINT, {
       method: 'POST',
+      mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({ formType: 'Partner', ...data }),
     })
