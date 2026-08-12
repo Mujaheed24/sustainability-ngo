@@ -46,20 +46,19 @@ export default function Navbar() {
         }}
       >
         <div
-          className="container-custom nav-inner"
-          style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+          className="container-custom"
+          style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.625rem 24px' }}
         >
           <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
             <img
               src="/logo.svg"
               alt="SWWRE Logo"
-              className="nav-logo"
-              style={{ objectFit: 'contain', display: 'block' }}
+              style={{ width: '64px', height: '64px', objectFit: 'contain', display: 'block' }}
             />
           </Link>
 
           {/* Desktop links */}
-          <div style={{ alignItems: 'center', gap: '1.75rem' }} className="hidden md:flex">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.75rem' }} className="hidden md:flex">
             {navLinks.map(link => {
               const active = pathname === link.href
               return (
@@ -111,8 +110,8 @@ export default function Navbar() {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--brand-white)', padding: '4px' }}
-            className="md:hidden inline-flex items-center"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--brand-white)', padding: '4px', display: 'flex', alignItems: 'center' }}
+            className="md:hidden"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -138,7 +137,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   style={{
-                    padding: '0.7rem 0',
+                    padding: '0.875rem 0',
                     borderBottom: '1px solid rgba(255,255,255,0.08)',
                     fontSize: '0.9375rem',
                     fontWeight: active ? 700 : 400,
@@ -171,15 +170,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-      <style>{`
-        .nav-inner { padding: 0.625rem 24px; }
-        .nav-logo { width: 64px; height: 64px; }
-        @media (max-width: 640px) {
-          .nav-inner { padding: 0.5rem 14px; }
-          .nav-logo { width: 42px; height: 42px; }
-        }
-      `}</style>
 
       {!isHome && <div style={{ height: '80px' }} />}
     </>
