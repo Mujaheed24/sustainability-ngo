@@ -7,6 +7,10 @@ import Link from 'next/link'
 import CopyLinkButton from '@/components/CopyLinkButton'
 import Reveal from '@/components/motion/Reveal'
 
+// Google Apps Script Web App URL (see google-apps-script/Code.gs in the
+// repo for the backend). Replace with your real deployed /exec URL.
+const GOOGLE_FORM_ENDPOINT = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+
 export default function GetInvolvedPage() {
   const [volunteerStatus, setVolunteerStatus] = useState<'idle' | 'success'>('idle')
   const [partnerStatus, setPartnerStatus] = useState<'idle' | 'success'>('idle')
@@ -14,11 +18,14 @@ export default function GetInvolvedPage() {
   const handleVolunteer = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
-    const data = new FormData(form)
-    await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    const data = Object.fromEntries(new FormData(form).entries())
+    // text/plain (not application/json) deliberately avoids a CORS
+    // preflight — Apps Script Web Apps don't handle OPTIONS requests.
+    // The script parses this as JSON on its end regardless.
+    await fetch(GOOGLE_FORM_ENDPOINT, {
       method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ formType: 'Volunteer', ...data }),
     })
     setVolunteerStatus('success')
     form.reset()
@@ -27,11 +34,11 @@ export default function GetInvolvedPage() {
   const handlePartner = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const form = e.currentTarget
-    const data = new FormData(form)
-    await fetch('https://formspree.io/f/YOUR_FORM_ID_2', {
+    const data = Object.fromEntries(new FormData(form).entries())
+    await fetch(GOOGLE_FORM_ENDPOINT, {
       method: 'POST',
-      body: data,
-      headers: { Accept: 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ formType: 'Partner', ...data }),
     })
     setPartnerStatus('success')
     form.reset()

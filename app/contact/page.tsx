@@ -54,6 +54,10 @@ const inputStyle = {
   transition: 'border-color 0.2s',
 }
 
+// Google Apps Script Web App URL (see google-apps-script/Code.gs in the
+// repo for the backend). Replace with your real deployed /exec URL.
+const GOOGLE_FORM_ENDPOINT = 'YOUR_GOOGLE_APPS_SCRIPT_URL'
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
@@ -67,12 +71,18 @@ export default function ContactPage() {
     e.preventDefault()
     setLoading(true)
     try {
-      const res = await fetch('https://formspree.io/f/YOUR_CONTACT_FORM_ID', {
+      const res = await fetch(GOOGLE_FORM_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(formData),
+        // Apps Script Web Apps don't handle CORS preflight (OPTIONS)
+        // requests, so this deliberately uses text/plain instead of
+        // application/json — that keeps the browser from sending a
+        // preflight at all. The script still parses it as JSON on the
+        // other end via JSON.parse(e.postData.contents).
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ formType: 'Contact', ...formData }),
       })
-      if (res.ok) {
+      const result = await res.json()
+      if (res.ok && result.ok) {
         setSubmitted(true)
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {

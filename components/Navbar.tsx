@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
@@ -24,9 +25,14 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => {
+  // Close the mobile menu on route change. Adjusted during render (React's
+  // recommended pattern for "resetting state when a prop changes") instead
+  // of an effect, so it doesn't trip react-hooks/set-state-in-effect.
+  const [prevPathname, setPrevPathname] = useState(pathname)
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname)
     setMenuOpen(false)
-  }, [pathname])
+  }
 
   const isHome = pathname === '/'
 
@@ -50,9 +56,12 @@ export default function Navbar() {
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-            <img
+            <Image
               src="/logo.svg"
               alt="SWWRE Logo"
+              width={64}
+              height={64}
+              unoptimized
               className="nav-logo"
               style={{ objectFit: 'contain', display: 'block' }}
             />

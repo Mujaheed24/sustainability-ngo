@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Mail, Phone, Clock } from 'lucide-react'
 
 // Column header with a short brand-colored underline, matching the
@@ -43,9 +44,12 @@ export default function Footer() {
           {/* Brand column */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
-              <img
+              <Image
                 src="/logo.svg"
                 alt="SWWRE Logo"
+                width={64}
+                height={64}
+                unoptimized
                 style={{ width: '64px', height: '64px', objectFit: 'contain', display: 'block', flexShrink: 0 }}
               />
               <span style={{ fontWeight: 700, color: 'var(--brand-white)', fontSize: '0.875rem', lineHeight: 1.4 }}>
